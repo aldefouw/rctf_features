@@ -13,8 +13,9 @@
 
     // Parse the query string to extract the GET variable
     function getQueryVariable(variable) {
-        var query = queryString.substring(1); // Remove the leading "?" character
+        var query = decodeURI(queryString.substring(1)); // Remove the leading "?" character
         var vars = query.split('&');
+
         for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split('=');
             if (decodeURIComponent(pair[0]) === variable) {
@@ -37,14 +38,10 @@
     }
 
     // Set the src attribute to the modifiedURL
-    scriptElement.src = `https://emgithub.com/embed-v2.js?target=${variableValue}&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on`;
+    scriptElement.src = `https://emgithub.com/embed-v2.js?target=${encodeURIComponent(variableValue)}&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on`;
 
     // Append the script element to the HTML document
     document.getElementById('featureContainer').appendChild(scriptElement);
 </script>
 </body>
 </html>
-
-
-
-
